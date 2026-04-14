@@ -1,0 +1,128 @@
+/* ============================================================
+   theme/mckinsey-mobile.css — McKinseyテイスト（モバイル版）
+   白背景 + ロイヤルブルー。Georgia見出し + Inter本文。
+   engine/mobile.css のCSS変数を上書きしてテーマを適用する。
+   ============================================================ */
+
+:root {
+  --color-bg:         #ffffff;
+  --color-fg:         #111111;
+  --color-muted:      rgba(107,114,128,.5);
+  --color-accent:     #1E3A8A;
+  --color-border:     rgba(229,231,235,.8);
+  --color-card-bg:    #fff;
+  --color-icon-bg:    rgba(30,58,138,.08);
+  --color-callout-bg: rgba(30,58,138,.05);
+  --color-section-bg: #1E3A5F;
+  --color-section-fg: #ffffff;
+
+  --font-sans:    'Inter', 'Noto Sans JP', sans-serif;
+  --font-heading: Georgia, serif;
+  --font-mono:    'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  --noise-opacity: 0;
+  --sp-slide: 48px 28px;
+}
+
+/* ── 見出しフォント ── */
+.headline,
+.section-title,
+.cover__title,
+.stat-card__number,
+.agenda__num,
+.person__name {
+  font-family: var(--font-heading);
+}
+
+/* ── Cover ── */
+.slide-cover {
+  background: #fafafa;
+}
+.cover__label {
+  font-size: 12px;
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+}
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-fg);
+}
+.cover__title .hl {
+  background: linear-gradient(transparent 60%, rgba(30,58,138,0.12) 60%);
+  padding: 0 4px;
+}
+.cover__tagline {
+  font-size: 15px;
+  color: rgba(107,114,128,.7);
+  margin-top: 10px;
+}
+.cover__meta {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 1.9;
+}
+.cover__meta strong { color: var(--color-fg); font-weight: 700; }
+.cover__date {
+  font-size: 11px;
+  color: rgba(107,114,128,.4);
+  margin-top: 8px;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+}
+
+/* ── Section Break ── */
+.slide-section {
+  background: linear-gradient(135deg, var(--color-section-bg) 0%, #2C4A6F 100%);
+}
+.section-label { color: rgba(255,255,255,.6); }
+.section-title { color: var(--color-section-fg); }
+.section-tags { color: rgba(255,255,255,.4); }
+
+/* ── カード境界 ── */
+.stat-card,
+.card,
+.stack-item,
+.feature-card,
+.quote-block,
+.chart-container {
+  border-color: var(--color-border);
+}
+
+/* ── アイコン背景 ── */
+.stack-item__icon,
+.feature-card__icon {
+  background: var(--color-icon-bg);
+  color: var(--color-accent);
+}
+
+/* ── 人物アバター ── */
+.person__avatar {
+  background: rgba(30,58,138,.1);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+}
+
+/* ── ロードマップ ── */
+.roadmap__phase--future {
+  background: rgba(229,231,235,.5);
+  color: var(--color-fg);
+}
+
+/* ── 引用 ── */
+.quote-block::before { color: rgba(229,231,235,.6); }
+.quote-block__author { color: var(--color-accent); }
+
+/* ── SVG装飾 ── */
+.deco circle,
+.deco path,
+.deco rect,
+.deco line {
+  stroke: var(--color-accent);
+}

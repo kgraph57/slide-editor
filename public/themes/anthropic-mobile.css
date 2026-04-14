@@ -1,0 +1,144 @@
+/* ============================================================
+   theme/anthropic-mobile.css — Anthropicテイスト（モバイル版）
+   アイボリー背景 + テラコッタアクセント。温かみのある知的デザイン。
+   engine/mobile.css のCSS変数を上書きしてテーマを適用する。
+   ============================================================ */
+
+:root {
+  --color-bg:         #faf9f5;
+  --color-fg:         #141413;
+  --color-muted:      rgba(61,61,58,.5);
+  --color-accent:     #d97757;
+  --color-border:     rgba(61,61,58,.1);
+  --color-card-bg:    #fff;
+  --color-icon-bg:    rgba(227,218,204,.3);
+  --color-callout-bg: rgba(217,119,87,.06);
+  --color-section-bg: #141413;
+  --color-section-fg: #faf9f5;
+
+  --font-sans:    'Poppins', 'Noto Sans JP', sans-serif;
+  --font-heading: 'Noto Serif JP', serif;
+  --font-mono:    'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  --noise-opacity: 0.03;
+  --sp-slide: 48px 28px;
+}
+
+/* ── 見出しフォント ── */
+.headline,
+.section-title,
+.cover__title,
+.stat-card__number,
+.agenda__num,
+.person__name {
+  font-family: var(--font-heading);
+}
+
+/* ── Cover ── */
+.slide-cover {
+  background: linear-gradient(160deg, #faf9f5 0%, rgba(227,218,204,.2) 100%);
+}
+.cover__label {
+  font-size: 12px;
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+}
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.5;
+  color: var(--color-fg);
+}
+.cover__title .hl {
+  background: linear-gradient(transparent 60%, rgba(217,119,87,0.15) 60%);
+  padding: 0 4px;
+}
+.cover__tagline {
+  font-size: 15px;
+  color: rgba(61,61,58,.6);
+  margin-top: 10px;
+  letter-spacing: 0.04em;
+}
+.cover__meta {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 1.9;
+}
+.cover__meta strong { color: var(--color-fg); font-weight: 700; }
+.cover__date {
+  font-size: 11px;
+  color: rgba(61,61,58,.35);
+  margin-top: 8px;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+}
+
+/* ── Section Break ── */
+.slide-section {
+  background: var(--color-section-bg);
+}
+.section-label {
+  color: var(--color-accent);
+}
+.section-title {
+  color: var(--color-section-fg);
+}
+.section-tags {
+  color: rgba(250,249,245,.4);
+}
+
+/* ── Anthropicカラーユーティリティ ── */
+.bg-clay  { background: rgba(217,119,87,.08); }
+.bg-kraft { background: rgba(212,162,127,.08); }
+.bg-oat   { background: rgba(227,218,204,.25); }
+
+/* ── カード境界を Oat 色に ── */
+.stat-card,
+.card,
+.stack-item,
+.feature-card,
+.quote-block,
+.chart-container {
+  border-color: rgba(227,218,204,.5);
+}
+
+/* ── アイコン背景を暖色に ── */
+.stack-item__icon,
+.feature-card__icon {
+  background: rgba(227,218,204,.3);
+  color: var(--color-accent);
+}
+
+/* ── 人物アバター ── */
+.person__avatar {
+  background: rgba(227,218,204,.5);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+}
+
+/* ── ロードマップ ── */
+.roadmap__phase--future {
+  background: rgba(227,218,204,.5);
+  color: var(--color-fg);
+}
+
+/* ── 引用 ── */
+.quote-block::before {
+  color: rgba(227,218,204,.6);
+}
+.quote-block__author {
+  color: var(--color-accent);
+}
+
+/* ── SVG装飾のデフォルト色 ── */
+.deco circle,
+.deco path,
+.deco rect,
+.deco line {
+  stroke: var(--color-accent);
+}

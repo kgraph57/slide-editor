@@ -1,0 +1,145 @@
+/* ============================================================
+   theme/hbr-mobile.css — HBRテイスト（モバイル版）
+   クリーム背景 + クリムゾン。Roboto Slab見出し + Libre Baskerville本文。
+   engine/mobile.css のCSS変数を上書きしてテーマを適用する。
+   ============================================================ */
+
+:root {
+  --color-bg:         #FDFBF7;
+  --color-fg:         #333333;
+  --color-muted:      rgba(102,102,102,.5);
+  --color-accent:     #A6192E;
+  --color-border:     rgba(217,217,217,.8);
+  --color-card-bg:    #fff;
+  --color-icon-bg:    rgba(166,25,46,.08);
+  --color-callout-bg: rgba(166,25,46,.05);
+  --color-section-bg: #2C2C2C;
+  --color-section-fg: #FDFBF7;
+
+  --font-sans:    'Libre Baskerville', 'Noto Sans JP', serif;
+  --font-heading: 'Roboto Slab', serif;
+  --font-mono:    'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  --noise-opacity: 0.02;
+  --sp-slide: 48px 28px;
+}
+
+/* ── 見出しフォント ── */
+.headline,
+.section-title,
+.cover__title,
+.stat-card__number,
+.agenda__num,
+.person__name {
+  font-family: var(--font-heading);
+}
+
+/* ── Cover ── */
+.slide-cover {
+  background: linear-gradient(160deg, #FDFBF7 0%, #F5F0E8 100%);
+}
+.cover__label {
+  font-size: 12px;
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+}
+.cover__title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-fg);
+}
+.cover__title .hl {
+  background: linear-gradient(transparent 60%, rgba(166,25,46,0.12) 60%);
+  padding: 0 4px;
+}
+.cover__tagline {
+  font-size: 15px;
+  font-family: var(--font-sans);
+  font-style: italic;
+  color: rgba(102,102,102,.7);
+  margin-top: 10px;
+}
+.cover__meta {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 1.9;
+}
+.cover__meta strong { color: var(--color-fg); font-weight: 700; }
+.cover__date {
+  font-size: 11px;
+  color: rgba(102,102,102,.4);
+  margin-top: 8px;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+}
+
+/* ── Section Break ── */
+.slide-section {
+  background: var(--color-section-bg);
+}
+/* Crimsonとslateを交互に使う */
+.slide-section:nth-of-type(even) {
+  background: var(--color-accent);
+}
+.section-label { color: rgba(255,255,255,.6); }
+.section-title { color: var(--color-section-fg); }
+.section-tags { color: rgba(253,251,247,.4); }
+
+/* ── 本文をセリフ体に ── */
+.body-text {
+  font-family: var(--font-sans);
+  line-height: 2.1;
+}
+
+/* ── カード境界 ── */
+.stat-card,
+.card,
+.stack-item,
+.feature-card,
+.quote-block,
+.chart-container {
+  border-color: var(--color-border);
+}
+
+/* ── アイコン背景 ── */
+.stack-item__icon,
+.feature-card__icon {
+  background: var(--color-icon-bg);
+  color: var(--color-accent);
+}
+
+/* ── 人物アバター ── */
+.person__avatar {
+  background: rgba(166,25,46,.1);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+}
+
+/* ── ロードマップ ── */
+.roadmap__phase--future {
+  background: rgba(217,217,217,.5);
+  color: var(--color-fg);
+}
+
+/* ── 引用 ── */
+.quote-block::before { color: rgba(217,217,217,.6); }
+.quote-block__author { color: var(--color-accent); }
+
+/* ── コールアウトのボーダーをCrimsonに ── */
+.callout {
+  border-left-color: var(--color-accent);
+}
+
+/* ── SVG装飾 ── */
+.deco circle,
+.deco path,
+.deco rect,
+.deco line {
+  stroke: var(--color-accent);
+}

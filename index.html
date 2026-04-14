@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slide Editor</title>
+  <link rel="stylesheet" href="/src/editor.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top Bar -->
+    <header id="topbar">
+      <div class="topbar-left">
+        <span class="logo">Slide Editor</span>
+        <select id="theme-select">
+          <option value="trend-report">Trend Report (Dark)</option>
+          <option value="tech-explainer">Tech Explainer (White)</option>
+          <option value="anthropic">Anthropic</option>
+          <option value="mckinsey">McKinsey</option>
+          <option value="hbr">HBR</option>
+        </select>
+      </div>
+      <div class="topbar-center">
+        <button id="btn-undo" title="Undo">&#8592;</button>
+        <button id="btn-redo" title="Redo">&#8594;</button>
+        <button id="btn-drag-mode" class="active" title="Toggle drag mode">Free Move</button>
+        <button id="btn-preview" title="Preview">Preview</button>
+      </div>
+      <div class="topbar-right">
+        <button id="btn-import">Import Deck</button>
+        <input type="file" id="file-import" accept=".html,.htm" hidden />
+        <button id="btn-export-deck">Export Deck</button>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div id="main">
+      <!-- Left: Slide List -->
+      <aside id="panel-slides">
+        <div class="panel-header">
+          <span>Slides</span>
+          <button id="btn-add-slide" title="Add Slide">+</button>
+        </div>
+        <div id="slide-list"></div>
+      </aside>
+
+      <!-- Center: GrapesJS Canvas -->
+      <main id="editor-area">
+        <div id="gjs"></div>
+      </main>
+
+      <!-- Right: Properties + Blocks -->
+      <aside id="panel-right">
+        <div class="panel-tabs">
+          <button class="tab" data-panel="blocks-panel">Blocks</button>
+          <button class="tab active" data-panel="styles-panel">Style</button>
+          <button class="tab" data-panel="traits-panel">Settings</button>
+          <button class="tab" data-panel="layers-panel">Layers</button>
+        </div>
+        <div id="blocks-panel" class="tab-content"></div>
+        <div id="styles-panel" class="tab-content active"></div>
+        <div id="traits-panel" class="tab-content"></div>
+        <div id="layers-panel" class="tab-content"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
