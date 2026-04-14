@@ -477,6 +477,7 @@ document.addEventListener('mousemove', (e) => {
   document.querySelectorAll('.thumb-iframe').forEach(iframe => {
     iframe.style.transform = `scale(${scale})`;
   });
+  scaleCanvas();
 });
 
 document.addEventListener('mouseup', () => {
@@ -703,8 +704,25 @@ document.body.addEventListener('drop', (e) => {
   }
 });
 
-// scaleCanvas removed — let GrapesJS handle iframe sizing natively
-function scaleCanvas() {} // no-op stub for existing calls
+// ── Canvas auto-scale: fit 1280x720 into available area ──
+function scaleCanvas() {
+  const area = document.getElementById('editor-area');
+  const wrapper = document.querySelector('.gjs-frame-wrapper');
+  if (!area || !wrapper) return;
+  const pad = 40;
+  const aw = area.clientWidth - pad;
+  const ah = area.clientHeight - pad;
+  const s = Math.min(aw / 1280, ah / 720, 1);
+  wrapper.style.transform = `scale(${s})`;
+}
+// Run on load, resize, and when panels toggle
+editor.on('load', () => requestAnimationFrame(scaleCanvas));
+window.addEventListener('resize', scaleCanvas);
+// Re-scale when right panel toggles
+new MutationObserver(scaleCanvas).observe(
+  document.getElementById('panel-right'),
+  { attributes: true, attributeFilter: ['class'] }
+);
 
 // ── Keyboard shortcuts ──
 document.addEventListener('keydown', (e) => {
