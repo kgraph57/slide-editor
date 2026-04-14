@@ -97,6 +97,77 @@ body {
   border-color: hsl(var(--ring));
 }
 
+/* ── Insert Menu (dropdown) ── */
+.insert-menu-wrapper { position: relative; }
+.insert-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(var(--popover));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px hsl(var(--background) / .6);
+  padding: 8px;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  min-width: 520px;
+}
+.insert-menu.hidden { display: none; }
+.insert-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.insert-group-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  padding: 4px 8px 2px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.insert-menu button {
+  background: none;
+  border: none;
+  color: hsl(var(--foreground));
+  padding: 6px 8px;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 11px;
+  font-family: var(--ed-font);
+  cursor: pointer;
+  text-align: left;
+  transition: background .1s;
+  white-space: nowrap;
+}
+.insert-menu button:hover {
+  background: hsl(var(--accent));
+}
+
+/* ── Thumb Size Slider ── */
+.panel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#thumb-size {
+  width: 60px;
+  height: 4px;
+  accent-color: hsl(var(--foreground));
+  cursor: pointer;
+}
+
+/* ── Sortable drag ghost ── */
+.slide-thumb.sortable-ghost {
+  opacity: .4;
+  border-color: hsl(var(--ring));
+}
+.slide-thumb.sortable-chosen {
+  box-shadow: 0 4px 12px hsl(var(--background) / .5);
+}
+
 #btn-export-deck, #btn-export-pptx {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));

@@ -1,5 +1,6 @@
 import grapesjs from 'grapesjs';
 import 'grapesjs/dist/css/grapes.min.css';
+import Sortable from 'sortablejs';
 import { registerBlocks } from './blocks.js';
 import { exportToPptx } from './export-pptx.js';
 
@@ -365,6 +366,9 @@ function renderSlideList() {
 
     list.appendChild(thumb);
   });
+
+  // Re-init sortable after re-render
+  initSortable();
 }
 
 // ── Tab Switching (toggle: click again to hide panel) ──
@@ -397,6 +401,71 @@ document.getElementById('theme-select').addEventListener('change', (e) => {
 
 // ── Add Slide Button ──
 document.getElementById('btn-add-slide').addEventListener('click', () => addSlide());
+
+// ── Insert Menu (PowerPoint-style) ──
+const insertBtn = document.getElementById('btn-insert');
+const insertMenu = document.getElementById('insert-menu');
+insertBtn.addEventListener('click', () => {
+  insertMenu.classList.toggle('hidden');
+});
+// Close when clicking outside
+document.addEventListener('click', (e) => {
+  if (!insertBtn.contains(e.target) && !insertMenu.contains(e.target)) {
+    insertMenu.classList.add('hidden');
+  }
+});
+// Insert element on click
+insertMenu.querySelectorAll('button[data-insert]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const blockId = btn.dataset.insert;
+    const block = editor.BlockManager.get(blockId);
+    if (block) {
+      const content = block.get('content');
+      editor.addComponents(content);
+    }
+    insertMenu.classList.add('hidden');
+  });
+});
+
+// ── Slide Sortable (drag to reorder) ──
+let sortableInstance = null;
+function initSortable() {
+  const list = document.getElementById('slide-list');
+  if (sortableInstance) sortableInstance.destroy();
+  sortableInstance = new Sortable(list, {
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    chosenClass: 'sortable-chosen',
+    onEnd: (evt) => {
+      const { oldIndex, newIndex } = evt;
+      if (oldIndex === newIndex) return;
+      // Reorder slides array
+      const [moved] = slides.splice(oldIndex, 1);
+      slides.splice(newIndex, 0, moved);
+      // Update active index
+      if (activeSlideIndex === oldIndex) {
+        activeSlideIndex = newIndex;
+      } else if (oldIndex < activeSlideIndex && newIndex >= activeSlideIndex) {
+        activeSlideIndex--;
+      } else if (oldIndex > activeSlideIndex && newIndex <= activeSlideIndex) {
+        activeSlideIndex++;
+      }
+      renderSlideList();
+    },
+  });
+}
+
+// ── Thumbnail Size Slider ──
+const thumbSizeSlider = document.getElementById('thumb-size');
+thumbSizeSlider.addEventListener('input', (e) => {
+  const w = parseInt(e.target.value);
+  document.getElementById('panel-slides').style.width = w + 'px';
+  // Recalculate iframe scale
+  const scale = (w - 20) / 1280;
+  document.querySelectorAll('.thumb-iframe').forEach(iframe => {
+    iframe.style.transform = `scale(${scale})`;
+  });
+});
 
 // ── Undo/Redo ──
 document.getElementById('btn-undo').addEventListener('click', () => editor.UndoManager.undo());

@@ -23,6 +23,49 @@
       <div class="topbar-center">
         <button id="btn-undo" title="Undo">&#8592;</button>
         <button id="btn-redo" title="Redo">&#8594;</button>
+        <div class="insert-menu-wrapper">
+          <button id="btn-insert" title="Insert element">+ Insert</button>
+          <div id="insert-menu" class="insert-menu hidden">
+            <div class="insert-group">
+              <div class="insert-group-label">Boxes</div>
+              <button data-insert="textbox">Text Box</button>
+              <button data-insert="box-solid">Solid Box</button>
+              <button data-insert="box-outline">Outline Box</button>
+              <button data-insert="box-glass">Glass Box</button>
+              <button data-insert="callout">Callout</button>
+              <button data-insert="badge">Badge</button>
+              <button data-insert="circle-number">Circle</button>
+            </div>
+            <div class="insert-group">
+              <div class="insert-group-label">Media</div>
+              <button data-insert="image">Image</button>
+              <button data-insert="video-youtube">YouTube</button>
+              <button data-insert="video-file">Video</button>
+            </div>
+            <div class="insert-group">
+              <div class="insert-group-label">Layout</div>
+              <button data-insert="cols-2">2 Columns</button>
+              <button data-insert="cols-3">3 Columns</button>
+              <button data-insert="text-img">Text + Image</button>
+              <button data-insert="flow">Flow Chart</button>
+            </div>
+            <div class="insert-group">
+              <div class="insert-group-label">Text</div>
+              <button data-insert="heading-h1">H1</button>
+              <button data-insert="heading-h2">H2</button>
+              <button data-insert="heading-h3">H3</button>
+              <button data-insert="paragraph">Paragraph</button>
+              <button data-insert="list">Bullet List</button>
+            </div>
+            <div class="insert-group">
+              <div class="insert-group-label">Data</div>
+              <button data-insert="stat">KPI</button>
+              <button data-insert="kpi-grid">KPI Grid</button>
+              <button data-insert="table">Table</button>
+              <button data-insert="timeline">Timeline</button>
+            </div>
+          </div>
+        </div>
         <button id="btn-drag-mode" class="active" title="Toggle drag mode">Free Move</button>
         <button id="btn-preview" title="Preview">Preview</button>
       </div>
@@ -40,7 +83,10 @@
       <aside id="panel-slides">
         <div class="panel-header">
           <span>Slides</span>
-          <button id="btn-add-slide" title="Add Slide">+</button>
+          <div class="panel-header-actions">
+            <input type="range" id="thumb-size" min="120" max="320" value="220" title="Thumbnail size" />
+            <button id="btn-add-slide" title="Add Slide">+</button>
+          </div>
         </div>
         <div id="slide-list"></div>
       </aside>
