@@ -303,13 +303,26 @@ function renderSlideList() {
   });
 }
 
-// ── Tab Switching ──
+// ── Tab Switching (toggle: click again to hide panel) ──
+const panelRight = document.getElementById('panel-right');
 document.querySelectorAll('.panel-tabs .tab').forEach(tab => {
   tab.addEventListener('click', () => {
+    const targetId = tab.dataset.panel;
+    const wasActive = tab.classList.contains('active');
+
+    // Deactivate all tabs and panels
     document.querySelectorAll('.panel-tabs .tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.panel).classList.add('active');
+
+    if (wasActive) {
+      // Same tab clicked again → collapse panel
+      panelRight.classList.add('collapsed');
+    } else {
+      // Different tab → show it, expand panel
+      tab.classList.add('active');
+      document.getElementById(targetId).classList.add('active');
+      panelRight.classList.remove('collapsed');
+    }
   });
 });
 
