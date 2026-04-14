@@ -59,13 +59,13 @@ body { font-family: var(--ed-font); background: var(--ed-bg); color: var(--ed-fg
 }
 #topbar button:hover { background: var(--ed-accent); color: #fff; border-color: var(--ed-accent); }
 
-#btn-export-deck {
+#btn-export-deck, #btn-export-pptx {
   background: var(--ed-accent);
   color: #fff;
   border-color: var(--ed-accent);
   font-weight: 600;
 }
-#btn-export-deck:hover {
+#btn-export-deck:hover, #btn-export-pptx:hover {
   background: var(--ed-accent-hover);
 }
 #btn-drag-mode {

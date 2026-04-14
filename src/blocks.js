@@ -443,4 +443,71 @@ export function registerBlocks(editor) {
     category: 'Media',
     content: `<div class="img-box"><img src="https://placehold.co/800x450/1a1a1a/333?text=Image" alt="image" /></div>`,
   });
+
+  bm.add('video-youtube', {
+    label: 'YouTube Video',
+    category: 'Media',
+    content: `<div style="position:relative;width:640px;height:360px;">
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="width:100%;height:100%;"></iframe>
+    </div>`,
+  });
+
+  bm.add('video-file', {
+    label: 'Video',
+    category: 'Media',
+    content: {
+      type: 'video',
+      src: '',
+      style: { width: '640px', height: '360px' },
+    },
+  });
+
+  // ── Free Boxes (text editable, colored, draggable) ──
+  bm.add('textbox', {
+    label: 'Text Box',
+    category: 'Boxes',
+    content: `<div style="padding:16px 24px;min-width:200px;min-height:60px;background:rgba(68,7,245,.12);border-radius:8px;color:var(--color-fg,#fff);font-size:1.1rem;line-height:1.6;">Click to type here</div>`,
+  });
+
+  bm.add('box-solid', {
+    label: 'Solid Box',
+    category: 'Boxes',
+    content: `<div style="padding:20px 28px;min-width:200px;min-height:80px;background:var(--color-accent,#4407F5);border-radius:8px;color:#fff;font-size:1.2rem;font-weight:600;display:flex;align-items:center;justify-content:center;">Text Here</div>`,
+  });
+
+  bm.add('box-outline', {
+    label: 'Outline Box',
+    category: 'Boxes',
+    content: `<div style="padding:16px 24px;min-width:200px;min-height:60px;border:2px solid var(--color-accent,#4407F5);border-radius:8px;color:var(--color-fg,#fff);font-size:1.1rem;line-height:1.6;">Click to type here</div>`,
+  });
+
+  bm.add('box-dark', {
+    label: 'Dark Box',
+    category: 'Boxes',
+    content: `<div style="padding:20px 28px;min-width:200px;min-height:80px;background:rgba(0,0,0,.6);border-radius:8px;color:#fff;font-size:1.1rem;line-height:1.6;">Click to type here</div>`,
+  });
+
+  bm.add('box-glass', {
+    label: 'Glass Box',
+    category: 'Boxes',
+    content: `<div style="padding:20px 28px;min-width:200px;min-height:80px;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);border-radius:12px;color:#fff;font-size:1.1rem;line-height:1.6;">Click to type here</div>`,
+  });
+
+  bm.add('callout', {
+    label: 'Callout Box',
+    category: 'Boxes',
+    content: `<div style="padding:20px 24px;min-width:240px;border-left:4px solid var(--color-accent,#4407F5);background:rgba(68,7,245,.08);border-radius:0 8px 8px 0;color:var(--color-fg,#fff);font-size:1.1rem;line-height:1.7;">Important point or quote goes here</div>`,
+  });
+
+  bm.add('circle-number', {
+    label: 'Circle Number',
+    category: 'Boxes',
+    content: `<div style="width:80px;height:80px;border-radius:50%;background:var(--color-accent,#4407F5);color:#fff;font-size:2rem;font-weight:700;display:flex;align-items:center;justify-content:center;">1</div>`,
+  });
+
+  bm.add('badge', {
+    label: 'Badge / Tag',
+    category: 'Boxes',
+    content: `<span style="display:inline-block;padding:4px 14px;background:var(--color-accent,#4407F5);color:#fff;border-radius:20px;font-size:.85rem;font-weight:600;letter-spacing:.03em;">Label</span>`,
+  });
 }

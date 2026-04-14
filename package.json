@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "grapesjs": "^0.22.15",
-    "grapesjs-preset-webpage": "^1.0.3"
+    "grapesjs-preset-webpage": "^1.0.3",
+    "pptxgenjs": "^4.0.1"
   },
   "devDependencies": {
     "vite": "^8.0.8"

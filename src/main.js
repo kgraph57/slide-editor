@@ -1,6 +1,7 @@
 import grapesjs from 'grapesjs';
 import 'grapesjs/dist/css/grapes.min.css';
 import { registerBlocks } from './blocks.js';
+import { exportToPptx } from './export-pptx.js';
 
 // ── Theme CSS paths (relative to slide-starter root) ──
 const THEME_CSS = {
@@ -442,6 +443,13 @@ document.getElementById('btn-export-deck').addEventListener('click', () => {
   const html = generateDeckHTML();
   const deckName = document.title.replace(/[^a-zA-Z0-9-_]/g, '') || 'deck';
   downloadFile(deckName + '.html', html);
+});
+
+// ── Export PPTX ──
+document.getElementById('btn-export-pptx').addEventListener('click', () => {
+  saveCurrentSlide();
+  const themeHref = THEME_CSS[currentTheme] || '';
+  exportToPptx(slides, themeHref, 'presentation');
 });
 
 // ── Generate full deck HTML with slide.js navigation ──
