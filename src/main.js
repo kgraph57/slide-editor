@@ -16,7 +16,7 @@ const ENGINE_CSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: "Poppins", "Noto Sans JP", sans-serif;
-    background: var(--color-bg, #0f0f0f);
+    background: var(--color-bg, #0f0f0f) !important;
     color: var(--color-fg, #f0f0ee);
     width: 1280px;
     height: 720px;
@@ -33,10 +33,14 @@ const ENGINE_CSS = `
     overflow: hidden;
     position: relative;
   }
-  /* GrapesJS wrapper needs to act as positioning context */
+  /* GrapesJS wrapper — full slide size, positioning context */
   [data-gjs-type="wrapper"] {
     position: relative !important;
-    min-height: 720px;
+    width: 1280px !important;
+    height: 720px !important;
+    min-height: 720px !important;
+    overflow: hidden !important;
+    background: var(--color-bg, #0f0f0f) !important;
   }
 `;
 
@@ -200,12 +204,21 @@ function loadSlide(index, { skipSave = false } = {}) {
   if (!skipSave) saveCurrentSlide();
   activeSlideIndex = index;
   const slide = slides[index];
+
+  // Clear then set — forces GrapesJS to fully re-render
+  editor.DomComponents.clear();
   editor.setComponents(slide.html);
   if (slide.css) {
     editor.setStyle(slide.css);
   }
-  // Re-apply canvas scaling after content change
-  requestAnimationFrame(scaleCanvas);
+
+  // Re-inject engine + theme CSS into canvas after component change
+  // Small delay to ensure GrapesJS has finished updating the iframe
+  setTimeout(() => {
+    loadThemeCSS(currentTheme);
+    scaleCanvas();
+  }, 100);
+
   renderSlideList();
 }
 
