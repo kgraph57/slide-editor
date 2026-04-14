@@ -455,16 +455,37 @@ function initSortable() {
   });
 }
 
-// ── Thumbnail Size Slider ──
-const thumbSizeSlider = document.getElementById('thumb-size');
-thumbSizeSlider.addEventListener('input', (e) => {
-  const w = parseInt(e.target.value);
-  document.getElementById('panel-slides').style.width = w + 'px';
-  // Recalculate iframe scale
-  const scale = (w - 20) / 1280;
+// ── Left Panel Resize (drag handle, PowerPoint-style) ──
+const resizeHandle = document.getElementById('resize-handle-left');
+const panelSlides = document.getElementById('panel-slides');
+let isResizing = false;
+
+resizeHandle.addEventListener('mousedown', (e) => {
+  isResizing = true;
+  resizeHandle.classList.add('dragging');
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+  e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isResizing) return;
+  const newWidth = Math.max(140, Math.min(400, e.clientX));
+  panelSlides.style.width = newWidth + 'px';
+  // Recalculate iframe thumbnail scale
+  const scale = (newWidth - 20) / 1280;
   document.querySelectorAll('.thumb-iframe').forEach(iframe => {
     iframe.style.transform = `scale(${scale})`;
   });
+});
+
+document.addEventListener('mouseup', () => {
+  if (isResizing) {
+    isResizing = false;
+    resizeHandle.classList.remove('dragging');
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+  }
 });
 
 // ── Undo/Redo ──

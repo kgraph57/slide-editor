@@ -146,17 +146,19 @@ body {
   background: hsl(var(--accent));
 }
 
-/* ── Thumb Size Slider ── */
-.panel-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ── Panel Resize Handle ── */
+.resize-handle {
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background .15s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
 }
-#thumb-size {
-  width: 60px;
-  height: 4px;
-  accent-color: hsl(var(--foreground));
-  cursor: pointer;
+.resize-handle:hover,
+.resize-handle.dragging {
+  background: hsl(var(--ring) / .4);
 }
 
 /* ── Sortable drag ghost ── */
