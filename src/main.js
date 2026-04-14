@@ -182,8 +182,16 @@ function createDefaultSlide() {
 
 function saveCurrentSlide() {
   if (slides[activeSlideIndex]) {
-    slides[activeSlideIndex].html = editor.getHtml();
-    slides[activeSlideIndex].css = editor.getCss();
+    // getHtml() returns <body>...</body>, extract inner content
+    let html = editor.getHtml();
+    html = html.replace(/^<body>/, '').replace(/<\/body>$/, '');
+    if (html && html !== '<body></body>' && html.trim() !== '') {
+      slides[activeSlideIndex].html = html;
+    }
+    const css = editor.getCss();
+    if (css) {
+      slides[activeSlideIndex].css = css;
+    }
   }
 }
 
@@ -196,6 +204,8 @@ function loadSlide(index, { skipSave = false } = {}) {
   if (slide.css) {
     editor.setStyle(slide.css);
   }
+  // Re-apply canvas scaling after content change
+  requestAnimationFrame(scaleCanvas);
   renderSlideList();
 }
 
