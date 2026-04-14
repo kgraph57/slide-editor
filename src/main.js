@@ -213,11 +213,7 @@ function loadSlide(index, { skipSave = false } = {}) {
   }
 
   // Re-inject engine + theme CSS into canvas after component change
-  // Small delay to ensure GrapesJS has finished updating the iframe
-  setTimeout(() => {
-    loadThemeCSS(currentTheme);
-    scaleCanvas();
-  }, 100);
+  setTimeout(() => loadThemeCSS(currentTheme), 100);
 
   renderSlideList();
 }
@@ -533,24 +529,8 @@ document.body.addEventListener('drop', (e) => {
   }
 });
 
-// ── Canvas 16:9 scaling ──
-function scaleCanvas() {
-  const frame = document.querySelector('.gjs-frame');
-  if (!frame) return;
-  const wrapper = frame.parentElement;
-  if (!wrapper) return;
-  const ww = wrapper.clientWidth;
-  const wh = wrapper.clientHeight;
-  // fit 1280x720 into available space with padding
-  const pad = 32;
-  const s = Math.min((ww - pad) / 1280, (wh - pad) / 720);
-  frame.style.transform = `scale(${s})`;
-}
-// Run after GrapesJS loads and on resize
-editor.on('load', () => {
-  requestAnimationFrame(scaleCanvas);
-});
-window.addEventListener('resize', scaleCanvas);
+// scaleCanvas removed — let GrapesJS handle iframe sizing natively
+function scaleCanvas() {} // no-op stub for existing calls
 
 // ── Keyboard shortcuts ──
 document.addEventListener('keydown', (e) => {

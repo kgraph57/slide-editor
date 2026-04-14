@@ -186,9 +186,6 @@ body { font-family: var(--ed-font); background: var(--ed-bg); color: var(--ed-fg
   overflow: hidden;
   position: relative;
   background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 #gjs {
   width: 100%;
@@ -229,28 +226,11 @@ body { font-family: var(--ed-font); background: var(--ed-bg); color: var(--ed-fg
 .tab-content.active { display: block; }
 
 /* ── GrapesJS Overrides ── */
-/* Canvas: center the frame and maintain 16:9 */
 .gjs-cv-canvas {
   background: #111 !important;
   top: 0 !important;
   width: 100% !important;
   height: 100% !important;
-}
-.gjs-frame-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-/* Lock the iframe to 16:9 and scale to fit the available area */
-.gjs-frame-wrapper iframe.gjs-frame {
-  width: 1280px !important;
-  height: 720px !important;
-  max-width: none !important;
-  max-height: none !important;
-  border: none !important;
-  transform-origin: center center !important;
 }
 
 /* Hide default GrapesJS panels — we use our own */
