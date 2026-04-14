@@ -139,6 +139,69 @@ const editor = window.__editor = grapesjs.init({
 // ── Register custom blocks ──
 registerBlocks(editor);
 
+// ── Custom components: image picker, video URL editing ──
+
+// Image: double-click to pick a file from local
+editor.on('component:dblclick', (component) => {
+  if (component.get('tagName') === 'img') {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        component.set('src', ev.target.result);
+        component.addAttributes({ src: ev.target.result });
+      };
+      reader.readAsDataURL(file);
+    };
+    input.click();
+  }
+});
+
+// Add traits for image src editing via Settings panel
+editor.DomComponents.addType('image', {
+  isComponent: (el) => el.tagName === 'IMG',
+  model: {
+    defaults: {
+      traits: [
+        { type: 'text', name: 'src', label: 'Image URL', changeProp: true },
+        { type: 'text', name: 'alt', label: 'Alt Text' },
+      ],
+    },
+  },
+});
+
+// iframe (YouTube) — editable src via Settings panel
+editor.DomComponents.addType('iframe', {
+  isComponent: (el) => el.tagName === 'IFRAME',
+  model: {
+    defaults: {
+      traits: [
+        { type: 'text', name: 'src', label: 'Video URL' },
+        { type: 'text', name: 'width', label: 'Width' },
+        { type: 'text', name: 'height', label: 'Height' },
+      ],
+    },
+  },
+});
+
+// video element — editable src
+editor.DomComponents.addType('video', {
+  isComponent: (el) => el.tagName === 'VIDEO',
+  model: {
+    defaults: {
+      traits: [
+        { type: 'text', name: 'src', label: 'Video URL' },
+        { type: 'checkbox', name: 'controls', label: 'Controls' },
+        { type: 'checkbox', name: 'autoplay', label: 'Autoplay' },
+      ],
+    },
+  },
+});
+
 // ── Load theme CSS into canvas ──
 function loadThemeCSS(themeName) {
   const canvas = editor.Canvas;
